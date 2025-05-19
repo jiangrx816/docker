@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  rabbitmq:
+    image: rabbitmq:latest
+    container_name: rabbitmq
+    hostname: rabbitmq
+    environment:
+      - TZ=Asia/Shanghai
+      - RABBITMQ_DEFAULT_USER=admin          # 默认管理员用户名
+      - RABBITMQ_DEFAULT_PASS=secret         # 默认管理员密码
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq      # 数据持久化
+      - rabbitmq_logs:/var/log/rabbitmq      # 日志持久化
+    ports:
+      - "5672:5672"     # AMQP 协议端口
+      - "15672:15672"   # 管理界面端口
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "status"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    networks:
+      - common-app-net
+
+volumes:
+  rabbitmq_data:
+  rabbitmq_logs:
+
+networks:
+  common-app-net:
+    external: true

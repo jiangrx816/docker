@@ -1,0 +1,17 @@
+version: '3.8'
+services:
+  nginx:
+    image: nginx:latest
+    container_name: nginx
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./conf.d:/etc/nginx/conf.d
+      - /Users/jiang/data/nc_path:/usr/share/nginx/html/nc_path:ro  # 添加这一行
+    networks:
+      - common-app-net
+
+networks:
+  common-app-net:
+    external: true
