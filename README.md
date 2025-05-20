@@ -14,7 +14,7 @@ docker-compose -f docker-compose.yml up -d
 │   ├── nginx                   nginx配置相关目录
 │   ├── docker-compose.yml      Docker 服务配置示例文件
 │   └── restart.sh              容器服务重启脚本
-└── www                         PHP 代码目录
+└── README.md                   说明文档
 ```
 
 ## 2.快速使用
@@ -31,4 +31,6 @@ docker-compose -f docker-compose.yml up -d
     $ cd docker                                         # 进入项目目录
 
     $ docker-compose up                                 # 启动
+
+    $ docker-compose up -d                              # 后台启动
     ```
